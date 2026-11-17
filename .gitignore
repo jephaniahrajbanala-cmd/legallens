@@ -1,0 +1,44 @@
+# ── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.python-version
+
+# ── Jupyter / Colab ─────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+.colab/
+
+# ── Model artifacts (large — see README) ────────────────────────────────────
+# The fine-tuned abstractive checkpoint is ~1.1 GB and is deliberately not committed.
+# Only its provenance manifest is tracked.
+abstractive/*
+!abstractive/checkpoint_manifest.json
+legallens_artifacts/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.onnx
+*.ckpt
+
+# ── Downloads / archives ────────────────────────────────────────────────────
+*.zip
+*.tar.gz
+*.7z
+
+# ── Editors / OS ────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# ── Logs / temp ─────────────────────────────────────────────────────────────
+*.log
+*.tmp
+~$*

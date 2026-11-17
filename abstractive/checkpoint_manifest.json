@@ -1,0 +1,12 @@
+{
+  "model_type": "AutoModelForSeq2SeqLM",
+  "base_model": "sshleifer/distilbart-cnn-12-6",
+  "checkpoint": "legallens_artifacts/abstractive",
+  "source_max_tokens": 1024,
+  "target_max_tokens": 160,
+  "epochs": 2,
+  "train_pairs": 240,
+  "validation_pairs": 40,
+  "eval_loss": 3.355640411376953,
+  "status": "trained"
+}

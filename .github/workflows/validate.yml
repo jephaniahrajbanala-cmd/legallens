@@ -1,0 +1,24 @@
+name: validate
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  checks:
+    name: notebook structure + syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate notebook structure
+        run: python validate_new.py
+
+      - name: Byte-compile application modules
+        run: python -m py_compile streamlit_app.py legal_lens_runtime.py clean_notebook.py
