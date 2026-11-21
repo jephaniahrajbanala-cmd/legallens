@@ -13,6 +13,14 @@ Takes an Indian court judgment, as a PDF or pasted text, and produces:
 `streamlit_app.py` is the app. `LegalAnalysis_NLP_Capstone.ipynb` is the training and evaluation
 notebook that produces the model artifacts.
 
+## Live demo
+
+https://legallenz.streamlit.app/
+
+The hosted copy runs everything except the abstractive summary. That model is a 1.1 GB checkpoint
+and is not included, so the site uses the extractive summary and the deterministic layers. To try
+the abstractive summary, run the app locally and follow the checkpoint steps below.
+
 ## Running the app
 
 Python 3.10 or newer.
