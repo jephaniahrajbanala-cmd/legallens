@@ -195,4 +195,5 @@ before redistributing derived data.
 
 ## License
 
-No licence yet. Add one before publishing.
+MIT, see `LICENSE`. The statute index in `legal_knowledge.json` is built from public Indian legal
+acts; check the source dataset terms if you redistribute it.
