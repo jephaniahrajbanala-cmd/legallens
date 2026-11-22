@@ -100,49 +100,159 @@ code {
   border-radius: 4px;
 }
 
-.ll-header {
+.ll-appbar {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 2rem;
   border-bottom: 1px solid var(--line);
   padding-bottom: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
-.ll-mark {
+.ll-brand {
   font-family: var(--pixel);
-  font-size: 2rem;
+  font-size: 1.6rem;
   line-height: 1;
   letter-spacing: .04em;
   color: var(--white);
 }
-.ll-mark span { color: var(--dim); margin-left: .15rem; }
-.ll-tag {
+.ll-brand span { color: var(--dim); margin-left: .15rem; }
+.ll-brand-sub {
   font-family: var(--pixel);
-  font-size: .55rem;
-  line-height: 1.7;
-  letter-spacing: .2em;
+  font-size: .48rem;
+  line-height: 1.6;
+  letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--dim);
+  margin-top: .5rem;
 }
-.ll-tag.right { text-align: right; color: var(--dim); }
-
-.ll-chips {
+.ll-appbar-right {
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
   gap: .4rem;
   flex-wrap: wrap;
-  margin-bottom: 1.6rem;
 }
 .ll-chip {
   font-family: var(--pixel);
-  font-size: .52rem;
-  letter-spacing: .14em;
+  font-size: .5rem;
+  letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--muted);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: .34rem .65rem;
   background: rgba(255,255,255,.02);
+  white-space: nowrap;
+}
+.ll-mini-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--white);
+  margin-right: .4rem;
+  vertical-align: middle;
+}
+
+[data-testid="stVerticalBlock"]:has(> [data-testid="stElementContainer"] .ll-card-mark) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.025), transparent 140px),
+    var(--panel) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 14px !important;
+  padding: 1.15rem 1.25rem !important;
+}
+.ll-card-mark { display: none; }
+
+.ll-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: .7rem;
+  margin-bottom: .9rem;
+}
+.ll-card-head .ll-label { margin: 0; color: var(--muted); }
+.ll-card-head .ll-meta { margin: 0; }
+
+.ll-nav-sep {
+  border-top: 1px solid var(--line);
+  margin: 1.1rem 0 .85rem;
+}
+
+.ll-view-head {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: .85rem;
+  margin-bottom: 1.15rem;
+}
+.ll-view-title {
+  font-family: var(--pixel);
+  font-size: .92rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.ll-view-sub {
+  font-family: var(--mono);
+  font-size: .72rem;
+  line-height: 1.6;
+  color: var(--dim);
+  margin-top: .35rem;
+}
+
+.ll-stat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .5rem;
+  padding: .4rem 0;
+  border-bottom: 1px dashed var(--line-soft);
+}
+.ll-stat span {
+  font-family: var(--pixel);
+  font-size: .48rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.ll-stat b {
+  font-family: var(--mono);
+  font-size: .76rem;
+  font-weight: 400;
+  color: var(--text);
+}
+.st-key-export_json button {
+  width: 100%;
+  white-space: nowrap;
+}
+.st-key-export_json button p {
+  white-space: nowrap;
+  font-size: .5rem !important;
+  letter-spacing: .08em !important;
+}
+
+/* Stack the rail above the workspace on small screens. */
+@media (max-width: 900px) {
+  [data-testid="stHorizontalBlock"]:has(.st-key-workspace_nav) {
+    flex-wrap: wrap;
+  }
+  [data-testid="stHorizontalBlock"]:has(.st-key-workspace_nav) > [data-testid="stColumn"] {
+    width: 100% !important;
+    flex: 1 1 100% !important;
+    min-width: 100% !important;
+  }
+  .st-key-workspace_nav [role="radiogroup"] {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .st-key-workspace_nav [data-testid="stRadioOption"] {
+    width: auto !important;
+  }
+  [data-testid="stColumn"]:has(.st-key-workspace_nav) .ll-nav-sep {
+    display: none;
+  }
 }
 
 .ll-label {
@@ -418,12 +528,60 @@ code {
 }
 .stRadio [role="radiogroup"] label:has(input:checked) p { color: var(--ink) !important; }
 .stRadio [role="radiogroup"] label > div:first-child { display: none; }
+.stRadio [data-testid="stRadioOption"] > div > div > div:first-child { display: none !important; }
 .stRadio [role="radiogroup"] label p {
   font-family: var(--pixel) !important;
   font-size: .52rem !important;
   letter-spacing: .1em !important;
   text-transform: uppercase;
   color: var(--muted) !important;
+}
+
+.st-key-workspace_nav [role="radiogroup"] {
+  flex-direction: column;
+  align-items: stretch;
+  gap: .18rem;
+  flex-wrap: nowrap;
+  counter-reset: nav;
+}
+.st-key-workspace_nav [data-testid="stRadioOption"] {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  padding: .5rem .6rem !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+.st-key-workspace_nav [data-testid="stRadioOption"]::before {
+  counter-increment: nav;
+  content: "0" counter(nav);
+  font-family: var(--pixel);
+  font-size: .48rem;
+  letter-spacing: .06em;
+  color: var(--dim);
+  margin-right: .55rem;
+}
+.st-key-workspace_nav [data-testid="stRadioOption"]:hover {
+  background: rgba(255,255,255,.03) !important;
+  border-color: transparent !important;
+}
+.st-key-workspace_nav [data-testid="stRadioOption"][data-selected="true"] {
+  background: var(--white) !important;
+  border-color: var(--white) !important;
+}
+.st-key-workspace_nav [data-testid="stRadioOption"][data-selected="true"]::before { color: var(--ink); }
+.st-key-workspace_nav [role="radiogroup"] label p {
+  font-family: var(--pixel) !important;
+  font-size: .54rem !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase;
+  color: var(--muted) !important;
+  white-space: nowrap;
+}
+.st-key-workspace_nav [data-testid="stRadioOption"][data-selected="true"] p {
+  color: var(--ink) !important;
 }
 
 [data-testid="stAlert"] {
@@ -531,9 +689,9 @@ hr { border: none; border-top: 1px solid var(--line); }
 ::-webkit-scrollbar-thumb:hover { background: #314355; }
 
 @media (max-width: 640px) {
-  .ll-header { flex-direction: column; align-items: flex-start; gap: .6rem; }
-  .ll-tag.right { display: none; }
-  .ll-mark { font-size: 1.6rem; }
+  .ll-appbar { flex-direction: column; align-items: flex-start; gap: .7rem; }
+  .ll-appbar-right { justify-content: flex-start; }
+  .ll-brand { font-size: 1.4rem; }
   .block-container { padding: 1.6rem 1rem 3rem; }
 }
 </style>
@@ -581,21 +739,28 @@ def _render_claims(claims: dict[str, list[dict]]) -> None:
             st.markdown(f"- {row['claim']}")
 
 
+WORKSPACE_VIEWS = {
+    "Summary": "Condense the judgment into the passages that matter.",
+    "QA + Evidence": "Ask about the case and see the sentence each answer came from.",
+    "Decision": "Read the court's order and the line that supports it.",
+    "Timeline": "List the dated events in the order they happened.",
+    "Claims": "Group the positions taken by each side and by the court.",
+    "Search": "Find the sentences closest to a phrase.",
+}
+
+
 def main() -> None:
     st.markdown(
         """
-<div class="ll-header">
+<div class="ll-appbar">
   <div>
-    <div class="ll-mark">LEGALLENS<span>//</span></div>
-    <div class="ll-tag">Indian legal document intelligence</div>
+    <div class="ll-brand">LEGALLENS<span>//</span></div>
+    <div class="ll-brand-sub">Indian legal document intelligence</div>
   </div>
-  <div class="ll-tag right">read<br/>route<br/>verify</div>
-</div>
-<div class="ll-chips">
-  <span class="ll-chip">extractive</span>
-  <span class="ll-chip">rule engine</span>
-  <span class="ll-chip">statute index</span>
-  <span class="ll-chip">local first</span>
+  <div class="ll-appbar-right">
+    <span class="ll-chip"><span class="ll-mini-dot"></span>local engine</span>
+    <span class="ll-chip">workspace</span>
+  </div>
 </div>
 """,
         unsafe_allow_html=True,
@@ -606,13 +771,15 @@ def main() -> None:
             '<div class="ll-side-mark">LEGALLENS<span>//</span></div>',
             unsafe_allow_html=True,
         )
-        _label("document input")
+        _label("document")
         demo_name = st.selectbox(
             "Load a sample document",
             ["None"] + list(DEMO_DOCUMENTS),
             help="Samples make it possible to try the app immediately.",
         )
         uploaded = st.file_uploader("Upload a judgment PDF", type=["pdf"])
+
+        _label("settings")
         artifact_dir = st.text_input(
             "Notebook artifact folder",
             value="legallens_artifacts",
@@ -660,141 +827,184 @@ def main() -> None:
             )
 
     sample_text = DEMO_DOCUMENTS.get(demo_name, "")
-    pasted = st.text_area(
-        "Paste judgment text (paste takes priority over the selected sample)",
-        value=sample_text,
-        height=260,
-        placeholder="Paste the judgment text here, or select a sample / upload a PDF.",
-    )
-
     pdf_text = ""
+    pdf_error = ""
     if uploaded is not None:
         try:
             pdf_text = read_pdf_bytes(uploaded.getvalue())
-            st.success(f"Extracted {len(word_tokens(pdf_text)):,} words from {uploaded.name}.")
         except Exception as exc:
-            st.error(f"Could not read the PDF: {exc}")
+            pdf_error = f"Could not read the PDF: {exc}"
 
-    text = clean_text(pasted or pdf_text or sample_text)
+    with st.container(border=True):
+        st.markdown('<div class="ll-card-mark"></div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="ll-card-head"><div class="ll-label">source document</div>'
+            '<div class="ll-meta">paste, upload, or pick a sample</div></div>',
+            unsafe_allow_html=True,
+        )
+        pasted = st.text_area(
+            "Judgment text",
+            value=sample_text,
+            height=190,
+            placeholder="Paste the judgment text here, or select a sample / upload a PDF.",
+            label_visibility="collapsed",
+        )
+        if pdf_error:
+            st.error(pdf_error)
+        elif uploaded is not None and pdf_text:
+            st.caption(f"Extracted {len(word_tokens(pdf_text)):,} words from {uploaded.name}.")
+
+        text = clean_text(pasted or pdf_text or sample_text)
+        if text:
+            st.markdown(
+                f'<div class="ll-meta">{len(word_tokens(text)):,} words &nbsp;&middot;&nbsp; {len(text):,} characters</div>',
+                unsafe_allow_html=True,
+            )
+        else:
+            _empty("Provide a PDF, paste text, or select a sample document to begin.")
+
     if not text:
-        _empty("Provide a PDF, paste text, or select a sample document to begin.")
         return
 
-    st.markdown(
-        f'<div class="ll-meta">{len(word_tokens(text)):,} words &nbsp;&middot;&nbsp; {len(text):,} characters</div>',
-        unsafe_allow_html=True,
-    )
+    analysis = analyze_document(text)
 
-    summary_tab, qa_tab, decision_tab, timeline_tab, claims_tab, search_tab = st.tabs(
-        ["Summary", "QA + Evidence", "Decision", "Timeline", "Claims", "Search"]
-    )
+    with st.container(border=True):
+        st.markdown('<div class="ll-card-mark"></div>', unsafe_allow_html=True)
+        nav_col, body_col = st.columns([1, 3.5], gap="large")
 
-    with summary_tab:
-        method = st.radio(
-            "Summary method",
-            ["Extractive (local)", "Abstractive (fine-tuned DistilBART)"],
-            horizontal=True,
-        )
-        if method.startswith("Abstractive"):
-            st.caption("The first run loads a large checkpoint, so it can take a minute.")
+        with nav_col:
+            _label("workspace")
+            view = st.radio(
+                "Workspace view",
+                list(WORKSPACE_VIEWS),
+                key="workspace_nav",
+                label_visibility="collapsed",
+            )
+            st.markdown('<div class="ll-nav-sep"></div>', unsafe_allow_html=True)
+            _label("document")
+            st.markdown(
+                f'<div class="ll-stat"><span>words</span><b>{analysis["word_count"]:,}</b></div>'
+                f'<div class="ll-stat"><span>sentences</span><b>{analysis["sentence_count"]:,}</b></div>'
+                f'<div class="ll-stat"><span>events</span><b>{len(analysis["timeline"]):,}</b></div>',
+                unsafe_allow_html=True,
+            )
+            st.markdown('<div class="ll-nav-sep"></div>', unsafe_allow_html=True)
+            st.download_button(
+                "Export JSON",
+                data=json.dumps(analysis, indent=2, default=str),
+                file_name="legallens_analysis.json",
+                mime="application/json",
+                key="export_json",
+            )
 
-        if st.button("Generate summary", type="primary", key="summary_button"):
-            wants_abstractive = method.startswith("Abstractive")
-            abstractive_ready = abstractive_capability.get("available", False)
-            if wants_abstractive and abstractive_ready:
-                with st.spinner("Loading the checkpoint and writing the summary..."):
-                    try:
-                        analysis = analyze_document(text, "abstractive", artifact_dir=artifact_dir)
-                    except TypeError:
-                        # A stale imported runtime may not accept artifact_dir.
-                        analysis = analyze_document(text, "abstractive")
-            else:
-                analysis = analyze_document(text, "extractive")
-                if wants_abstractive:
-                    analysis["summary_note"] = abstractive_capability.get(
-                        "message",
-                        "Abstractive checkpoint unavailable; extractive summary selected.",
+        with body_col:
+            st.markdown(
+                f'<div class="ll-view-head"><div class="ll-view-title">{html.escape(view)}</div>'
+                f'<div class="ll-view-sub">{html.escape(WORKSPACE_VIEWS[view])}</div></div>',
+                unsafe_allow_html=True,
+            )
+
+            if view == "Summary":
+                method = st.radio(
+                    "Summary method",
+                    ["Extractive (local)", "Abstractive (fine-tuned DistilBART)"],
+                    horizontal=True,
+                    key="summary_method",
+                )
+                if method.startswith("Abstractive"):
+                    st.caption("The first run loads a large checkpoint, so it can take a minute.")
+
+                if st.button("Generate summary", type="primary", key="summary_button"):
+                    wants_abstractive = method.startswith("Abstractive")
+                    abstractive_ready = abstractive_capability.get("available", False)
+                    if wants_abstractive and abstractive_ready:
+                        with st.spinner("Loading the checkpoint and writing the summary..."):
+                            try:
+                                summary_analysis = analyze_document(
+                                    text, "abstractive", artifact_dir=artifact_dir
+                                )
+                            except TypeError:
+                                # A stale imported runtime may not accept artifact_dir.
+                                summary_analysis = analyze_document(text, "abstractive")
+                    else:
+                        summary_analysis = analyze_document(text, "extractive")
+                        if wants_abstractive:
+                            summary_analysis["summary_note"] = abstractive_capability.get(
+                                "message",
+                                "Abstractive checkpoint unavailable; extractive summary selected.",
+                            )
+                            summary_analysis["summary_source"] = "extractive fallback"
+                    if summary_analysis["summary_note"]:
+                        if summary_analysis["summary_source"] == "notebook abstractive checkpoint":
+                            st.success(summary_analysis["summary_note"])
+                        else:
+                            st.warning(summary_analysis["summary_note"])
+                    st.caption(f"Summary source: {summary_analysis['summary_source']}")
+                    _label("summary")
+                    st.write(summary_analysis["summary"] or "No summary could be generated.")
+
+            elif view == "QA + Evidence":
+                question = st.text_input(
+                    "Question",
+                    value="What was the outcome of the case?",
+                    placeholder="e.g. Who is the petitioner? Which section is referred to? What is Section 420?",
+                    key="qa_question",
+                )
+                if st.button("Answer", type="primary", key="qa_button"):
+                    result = answer_question(question, text, artifact_dir=artifact_dir)
+                    _label("answer")
+                    st.markdown(
+                        f'<div class="ll-answer">{html.escape(result["answer"] or "No confident answer found")}</div>',
+                        unsafe_allow_html=True,
                     )
-                    analysis["summary_source"] = "extractive fallback"
-            if analysis["summary_note"]:
-                if analysis["summary_source"] == "notebook abstractive checkpoint":
-                    st.success(analysis["summary_note"])
-                else:
-                    st.warning(analysis["summary_note"])
-            st.caption(f"Summary source: {analysis['summary_source']}")
-            _label("summary")
-            st.write(analysis["summary"] or "No summary could be generated.")
+                    if result["evidence"]:
+                        _label("evidence")
+                        st.markdown(
+                            f'<div class="ll-evidence">{html.escape(result["evidence"])}</div>',
+                            unsafe_allow_html=True,
+                        )
 
-    with qa_tab:
-        question = st.text_input(
-            "Question",
-            value="What was the outcome of the case?",
-            placeholder="e.g. Who is the petitioner? Which section is referred to? What is Section 420?",
-        )
-        if st.button("Answer", type="primary", key="qa_button"):
-            result = answer_question(question, text, artifact_dir=artifact_dir)
-            _label("answer")
-            st.markdown(
-                f'<div class="ll-answer">{html.escape(result["answer"] or "No confident answer found")}</div>',
-                unsafe_allow_html=True,
-            )
-            if result["evidence"]:
-                _label("evidence")
-                st.markdown(
-                    f'<div class="ll-evidence">{html.escape(result["evidence"])}</div>',
-                    unsafe_allow_html=True,
+            elif view == "Decision":
+                if st.button("Extract outcome", type="primary", key="decision_button"):
+                    outcome = extract_outcome_rules(text)
+                    _label("outcome")
+                    st.markdown(
+                        f'<div class="ll-outcome">{html.escape(outcome["outcome"])}</div>',
+                        unsafe_allow_html=True,
+                    )
+                    st.caption(f"confidence {outcome['confidence']:.2f}")
+                    if outcome["evidence"]:
+                        _label("evidence")
+                        st.markdown(
+                            f'<div class="ll-evidence">{html.escape(outcome["evidence"])}</div>',
+                            unsafe_allow_html=True,
+                        )
+
+            elif view == "Timeline":
+                if st.button("Extract timeline", type="primary", key="timeline_button"):
+                    _render_timeline(extract_timeline(text))
+
+            elif view == "Claims":
+                if st.button("Extract positions", type="primary", key="claims_button"):
+                    _render_claims(extract_claims(text))
+
+            else:
+                query = st.text_input(
+                    "Search query",
+                    placeholder="e.g. alternative remedy",
+                    key="search_query",
                 )
-
-    with decision_tab:
-        if st.button("Extract outcome", type="primary", key="decision_button"):
-            outcome = extract_outcome_rules(text)
-            _label("outcome")
-            st.markdown(
-                f'<div class="ll-outcome">{html.escape(outcome["outcome"])}</div>',
-                unsafe_allow_html=True,
-            )
-            st.caption(f"confidence {outcome['confidence']:.2f}")
-            if outcome["evidence"]:
-                _label("evidence")
-                st.markdown(
-                    f'<div class="ll-evidence">{html.escape(outcome["evidence"])}</div>',
-                    unsafe_allow_html=True,
-                )
-
-    with timeline_tab:
-        if st.button("Extract timeline", type="primary", key="timeline_button"):
-            _render_timeline(extract_timeline(text))
-
-    with claims_tab:
-        if st.button("Extract positions", type="primary", key="claims_button"):
-            _render_claims(extract_claims(text))
-
-    with search_tab:
-        query = st.text_input("Search query", placeholder="e.g. alternative remedy")
-        if st.button("Search", type="primary", key="search_button"):
-            results = search_judgment(query, text, limit=3)
-            if not results:
-                _empty("No matching sentences.")
-            for index, result in enumerate(results, 1):
-                st.markdown(
-                    f'<div class="ll-result"><div class="ll-result-head">'
-                    f'<span>result {index:02d}</span><span>score {result["score"]:.3f}</span></div>'
-                    f'<div class="ll-result-body">{html.escape(result["sentence"])}</div></div>',
-                    unsafe_allow_html=True,
-                )
-
-    with st.expander("Document stats and export"):
-        analysis = analyze_document(text)
-        col1, col2, col3 = st.columns(3)
-        col1.metric("Words", f"{analysis['word_count']:,}")
-        col2.metric("Sentences", f"{analysis['sentence_count']:,}")
-        col3.metric("Timeline events", f"{len(analysis['timeline']):,}")
-        st.download_button(
-            "Download analysis JSON",
-            data=json.dumps(analysis, indent=2, default=str),
-            file_name="legallens_analysis.json",
-            mime="application/json",
-        )
+                if st.button("Search", type="primary", key="search_button"):
+                    results = search_judgment(query, text, limit=3)
+                    if not results:
+                        _empty("No matching sentences.")
+                    for index, result in enumerate(results, 1):
+                        st.markdown(
+                            f'<div class="ll-result"><div class="ll-result-head">'
+                            f'<span>result {index:02d}</span><span>score {result["score"]:.3f}</span></div>'
+                            f'<div class="ll-result-body">{html.escape(result["sentence"])}</div></div>',
+                            unsafe_allow_html=True,
+                        )
 
 
 if __name__ == "__main__":
