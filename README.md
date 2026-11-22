@@ -113,7 +113,7 @@ Expand-Archive .\abstractive_checkpoint.zip -DestinationPath .\legallens_artifac
 Test-Path .\legallens_artifacts\abstractive\config.json
 ```
 
-3. Restart Streamlit. The sidebar then reports the checkpoint as ready.
+3. Restart Streamlit. Open **Settings** to see the checkpoint reported as ready.
 
 If the checkpoint is missing or fails to load, the app shows the error and falls back to the
 extractive summary.

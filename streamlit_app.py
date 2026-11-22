@@ -41,7 +41,7 @@ THEME = """
   --line-soft: #18232f;
   --text: #dde6ef;
   --muted: #9aabbd;
-  --dim: #74869a;
+  --dim: #7d8fa3;
   --white: #f3f7fb;
   --pixel: 'Silkscreen', 'Courier New', monospace;
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -50,7 +50,7 @@ THEME = """
 .stApp {
   background-color: var(--ink);
   background-image:
-    radial-gradient(900px 500px at 50% -8%, rgba(96,124,153,.12), transparent 65%),
+    radial-gradient(1000px 560px at 50% -10%, rgba(96,124,153,.14), transparent 65%),
     radial-gradient(circle at 1px 1px, rgba(154,171,189,.07) 1px, transparent 0);
   background-size: auto, 26px 26px;
   color: var(--text);
@@ -62,34 +62,37 @@ header[data-testid="stHeader"] { background: transparent; height: 0; }
 [data-testid="stDecoration"],
 #MainMenu,
 footer,
-[data-testid="stToolbar"] { display: none !important; }
+[data-testid="stToolbar"],
+[data-testid="stSidebar"],
+[data-testid="stSidebarCollapsedControl"] { display: none !important; }
 
-.block-container { padding: 2.4rem 1.6rem 4rem; max-width: 1160px; }
+.block-container { padding: 1.6rem 2.5rem 5rem; max-width: 1300px; }
 
 ::selection { background: var(--white); color: var(--ink); }
 
 .stApp p, .stApp li, .stApp label, .stApp td, .stApp th { font-family: var(--mono); }
-.stApp p { color: var(--text); line-height: 1.7; }
+.stApp p { color: var(--text); line-height: 1.8; font-size: 1rem; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--pixel) !important;
   font-weight: 400 !important;
-  letter-spacing: .04em;
+  letter-spacing: .02em;
   color: var(--white) !important;
 }
-h1 { font-size: 1.55rem; }
-h2 { font-size: 1.15rem; }
-h3 { font-size: .95rem; }
-h4 { font-size: .8rem; }
-h5 { font-size: .7rem; }
+h1 { font-size: 2.2rem; }
+h2 { font-size: 1.6rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1rem; }
+h5 { font-size: .85rem; }
 
 a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
 
 [data-testid="stCaptionContainer"] p, .stCaption p {
   font-family: var(--mono) !important;
-  font-size: .7rem !important;
+  font-size: .82rem !important;
   color: var(--dim) !important;
-  letter-spacing: .04em;
+  line-height: 1.7 !important;
+  letter-spacing: .01em;
 }
 
 code {
@@ -100,48 +103,49 @@ code {
   border-radius: 4px;
 }
 
+/* ── top bar ───────────────────────────────────────────── */
+
 .ll-appbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
   border-bottom: 1px solid var(--line);
-  padding-bottom: 1rem;
-  margin-bottom: 1.5rem;
+  padding: .4rem 0 1.15rem;
 }
 .ll-brand {
   font-family: var(--pixel);
-  font-size: 1.6rem;
+  font-size: 1.55rem;
   line-height: 1;
   letter-spacing: .04em;
   color: var(--white);
 }
-.ll-brand span { color: var(--dim); margin-left: .15rem; }
+.ll-brand span { color: var(--dim); margin-left: .12rem; }
 .ll-brand-sub {
   font-family: var(--pixel);
-  font-size: .48rem;
+  font-size: .5rem;
   line-height: 1.6;
   letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--dim);
-  margin-top: .5rem;
+  margin-top: .55rem;
 }
 .ll-appbar-right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: .4rem;
+  gap: .45rem;
   flex-wrap: wrap;
 }
 .ll-chip {
   font-family: var(--pixel);
-  font-size: .5rem;
-  letter-spacing: .12em;
+  font-size: .6rem;
+  letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted);
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: .34rem .65rem;
+  padding: .42rem .8rem;
   background: rgba(255,255,255,.02);
   white-space: nowrap;
 }
@@ -151,17 +155,51 @@ code {
   height: 5px;
   border-radius: 50%;
   background: var(--white);
-  margin-right: .4rem;
+  margin-right: .42rem;
   vertical-align: middle;
 }
+.ll-mini-dot.off {
+  background: transparent;
+  border: 1px solid var(--dim);
+}
+
+/* ── hero ──────────────────────────────────────────────── */
+
+.ll-hero { padding: 4rem 0 3.2rem; }
+.ll-hero-title {
+  font-family: var(--pixel);
+  font-size: clamp(2.6rem, 5.4vw, 4.4rem);
+  line-height: 1.06;
+  letter-spacing: .01em;
+  color: var(--white);
+  text-wrap: balance;
+  max-width: 15ch;
+}
+.ll-hero-title span { color: var(--dim); }
+.ll-hero-sub {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--muted);
+  max-width: 60ch;
+  margin: 1.5rem 0 0;
+}
+.ll-hero-note {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-top: 1.8rem;
+}
+
+/* ── source panel ──────────────────────────────────────── */
 
 [data-testid="stVerticalBlock"]:has(> [data-testid="stElementContainer"] .ll-card-mark) {
   background:
-    linear-gradient(180deg, rgba(255,255,255,.025), transparent 140px),
+    linear-gradient(180deg, rgba(255,255,255,.03), transparent 180px),
     var(--panel) !important;
   border: 1px solid var(--line) !important;
-  border-radius: 14px !important;
-  padding: 1.15rem 1.25rem !important;
+  border-radius: 16px !important;
+  padding: 1.5rem 1.6rem !important;
 }
 .ll-card-mark { display: none; }
 
@@ -171,222 +209,168 @@ code {
   justify-content: space-between;
   gap: 1rem;
   border-bottom: 1px solid var(--line);
-  padding-bottom: .7rem;
-  margin-bottom: .9rem;
-}
-.ll-card-head .ll-label { margin: 0; color: var(--muted); }
-.ll-card-head .ll-meta { margin: 0; }
-
-.ll-nav-sep {
-  border-top: 1px solid var(--line);
-  margin: 1.1rem 0 .85rem;
-}
-
-.ll-view-head {
-  border-bottom: 1px solid var(--line);
   padding-bottom: .85rem;
   margin-bottom: 1.15rem;
 }
+.ll-card-head .ll-label { margin: 0; color: var(--muted); }
+.ll-meta {
+  font-family: var(--mono);
+  font-size: .82rem;
+  letter-spacing: .02em;
+  color: var(--dim);
+  margin: 0;
+}
+
+/* document counters under the textarea */
+.ll-docmeta {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .4rem 1.8rem;
+  margin: .9rem 0 .1rem;
+}
+.ll-docmeta span {
+  font-family: var(--pixel);
+  font-size: .6rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  white-space: nowrap;
+}
+.ll-docmeta b {
+  font-family: var(--mono);
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--text);
+  margin-right: .4rem;
+}
+
+/* ── workspace ─────────────────────────────────────────── */
+
+.ll-workspace-rule {
+  border-top: 1px solid var(--line);
+  margin: 3.2rem 0 2.1rem;
+}
+.ll-view-head {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1rem;
+  margin-bottom: 1.4rem;
+}
 .ll-view-title {
   font-family: var(--pixel);
-  font-size: .92rem;
-  letter-spacing: .06em;
+  font-size: 1.8rem;
+  line-height: 1.25;
+  letter-spacing: .03em;
   text-transform: uppercase;
   color: var(--white);
 }
 .ll-view-sub {
   font-family: var(--mono);
-  font-size: .72rem;
-  line-height: 1.6;
-  color: var(--dim);
-  margin-top: .35rem;
-}
-
-.ll-stat {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: .5rem;
-  padding: .4rem 0;
-  border-bottom: 1px dashed var(--line-soft);
-}
-.ll-stat span {
-  font-family: var(--pixel);
-  font-size: .48rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
-.ll-stat b {
-  font-family: var(--mono);
-  font-size: .76rem;
-  font-weight: 400;
-  color: var(--text);
-}
-.st-key-export_json button {
-  width: 100%;
-  white-space: nowrap;
-}
-.st-key-export_json button p {
-  white-space: nowrap;
-  font-size: .5rem !important;
-  letter-spacing: .08em !important;
-}
-
-/* Stack the rail above the workspace on small screens. */
-@media (max-width: 900px) {
-  [data-testid="stHorizontalBlock"]:has(.st-key-workspace_nav) {
-    flex-wrap: wrap;
-  }
-  [data-testid="stHorizontalBlock"]:has(.st-key-workspace_nav) > [data-testid="stColumn"] {
-    width: 100% !important;
-    flex: 1 1 100% !important;
-    min-width: 100% !important;
-  }
-  .st-key-workspace_nav [role="radiogroup"] {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  .st-key-workspace_nav [data-testid="stRadioOption"] {
-    width: auto !important;
-  }
-  [data-testid="stColumn"]:has(.st-key-workspace_nav) .ll-nav-sep {
-    display: none;
-  }
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-top: .55rem;
+  max-width: 64ch;
 }
 
 .ll-label {
   font-family: var(--pixel);
-  font-size: .55rem;
-  letter-spacing: .18em;
+  font-size: .62rem;
+  letter-spacing: .15em;
   text-transform: uppercase;
   color: var(--dim);
-  margin: .1rem 0 .55rem;
+  margin: .1rem 0 .6rem;
+}
+.ll-nav-sep {
+  border-top: 1px solid var(--line);
+  margin: 1.2rem 0 1rem;
 }
 
+/* ── outputs ───────────────────────────────────────────── */
+
+.ll-summary {
+  font-family: var(--mono);
+  font-size: 1.12rem;
+  line-height: 1.95;
+  color: var(--text);
+  max-width: 74ch;
+  white-space: pre-wrap;
+  margin-top: .3rem;
+}
 .ll-answer {
   font-family: var(--mono);
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 1.5rem;
+  line-height: 1.55;
   color: var(--white);
-  border-left: 2px solid var(--white);
-  padding: .15rem 0 .15rem 1rem;
-  margin: .4rem 0 1.1rem;
+  border-left: 1px solid var(--white);
+  padding: .2rem 0 .2rem 1.15rem;
+  margin: .5rem 0 1.3rem;
+  max-width: 60ch;
 }
 .ll-evidence {
   font-family: var(--mono);
-  font-size: .86rem;
-  line-height: 1.75;
+  font-size: 1rem;
+  line-height: 1.8;
   color: var(--muted);
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 12px;
-  padding: .9rem 1.1rem;
-  margin-top: .4rem;
+  padding: 1.05rem 1.25rem;
+  margin-top: .45rem;
 }
 .ll-outcome {
-  font-family: var(--pixel);
-  font-size: 1.1rem;
-  line-height: 1.5;
+  font-family: var(--mono);
+  font-size: 1.3rem;
+  line-height: 1.6;
   color: var(--white);
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--panel);
-  padding: 1rem 1.2rem;
-  margin-bottom: .6rem;
-}
-.ll-meta {
-  font-family: var(--mono);
-  font-size: .7rem;
-  letter-spacing: .06em;
-  color: var(--dim);
-  text-transform: uppercase;
-  margin: .2rem 0 1rem;
+  padding: 1.1rem 1.3rem;
+  margin-bottom: .7rem;
 }
 .ll-empty {
   font-family: var(--mono);
-  font-size: .82rem;
+  font-size: .95rem;
+  line-height: 1.7;
   color: var(--dim);
   border: 1px dashed var(--line);
   border-radius: 12px;
-  padding: 1rem 1.1rem;
+  padding: 1.05rem 1.2rem;
 }
 
 .ll-result {
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--panel);
-  padding: .85rem 1.05rem;
-  margin-bottom: .6rem;
+  padding: 1.05rem 1.25rem;
+  margin-bottom: .75rem;
 }
 .ll-result-head {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   font-family: var(--pixel);
-  font-size: .52rem;
-  letter-spacing: .14em;
+  font-size: .56rem;
+  letter-spacing: .13em;
   text-transform: uppercase;
   color: var(--dim);
-  margin-bottom: .45rem;
+  margin-bottom: .55rem;
 }
 .ll-result-body {
   font-family: var(--mono);
-  font-size: .84rem;
-  line-height: 1.7;
-  color: var(--text);
-}
-
-[data-testid="stSidebar"] {
-  background: var(--panel);
-  border-right: 1px solid var(--line);
-}
-[data-testid="stSidebarContent"] { padding: 1.6rem 1.15rem 2rem; }
-[data-testid="stSidebar"] .block-container { padding: 1.6rem 1.15rem 2rem; }
-.ll-side-mark {
-  font-family: var(--pixel);
   font-size: 1rem;
-  letter-spacing: .05em;
-  color: var(--white);
-  margin-bottom: 1.4rem;
-}
-.ll-side-mark span { color: var(--dim); }
-
-.ll-status {
-  display: flex;
-  align-items: baseline;
-  gap: .5rem;
-  padding: .45rem 0;
-  border-bottom: 1px dashed var(--line-soft);
-}
-.ll-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  border: 1px solid var(--white);
-  background: var(--white);
-  flex: none;
-  align-self: center;
-}
-.ll-dot.off { background: transparent; border-color: var(--dim); }
-.ll-status-name {
-  font-family: var(--pixel);
-  font-size: .55rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+  line-height: 1.8;
   color: var(--text);
 }
-.ll-status-detail {
-  color: var(--dim);
-  font-size: .66rem;
-  margin-left: auto;
-  text-align: right;
-}
+
+/* ── widgets ───────────────────────────────────────────── */
 
 [data-testid="stWidgetLabel"] p {
   font-family: var(--pixel) !important;
-  font-size: .52rem !important;
-  letter-spacing: .14em !important;
+  font-size: .62rem !important;
+  letter-spacing: .12em !important;
   text-transform: uppercase;
   color: var(--muted) !important;
 }
@@ -412,11 +396,12 @@ code {
   border: none !important;
   box-shadow: none !important;
   font-family: var(--mono) !important;
-  font-size: .84rem !important;
-  line-height: 1.7 !important;
+  font-size: 1rem !important;
+  line-height: 1.8 !important;
+  caret-color: var(--white);
 }
 .stTextInput input::placeholder,
-.stTextArea textarea::placeholder { color: #526275 !important; }
+.stTextArea textarea::placeholder { color: var(--dim) !important; }
 
 [data-testid="stSelectbox"] [data-baseweb="select"] > div {
   background: var(--panel-2) !important;
@@ -424,7 +409,8 @@ code {
   border-radius: 10px !important;
   color: var(--text) !important;
   font-family: var(--mono) !important;
-  font-size: .84rem !important;
+  font-size: .95rem !important;
+  min-height: 44px;
 }
 [data-baseweb="popover"] [role="listbox"] {
   background: var(--panel-2) !important;
@@ -434,26 +420,27 @@ code {
   background: var(--panel-2) !important;
   color: var(--text) !important;
   font-family: var(--mono) !important;
+  font-size: .95rem !important;
 }
 [data-baseweb="popover"] li:hover { background: var(--line-soft) !important; }
 
 .stButton > button, .stDownloadButton > button {
   font-family: var(--pixel) !important;
-  font-size: .58rem !important;
-  letter-spacing: .14em !important;
+  font-size: .66rem !important;
+  letter-spacing: .11em !important;
   text-transform: uppercase;
   color: var(--text) !important;
   background: transparent !important;
   border: 1px solid var(--line) !important;
   border-radius: 999px !important;
-  padding: .62rem 1.15rem !important;
+  padding: .76rem 1.4rem !important;
   min-height: 0 !important;
-  transition: all .15s ease;
+  transition: background .16s ease, color .16s ease, border-color .16s ease;
 }
 .stButton > button p, .stDownloadButton > button p {
   font-family: var(--pixel) !important;
-  font-size: .58rem !important;
-  letter-spacing: .14em !important;
+  font-size: .66rem !important;
+  letter-spacing: .11em !important;
   color: inherit !important;
 }
 .stButton > button:hover, .stDownloadButton > button:hover {
@@ -473,53 +460,48 @@ code {
   background: transparent !important;
   border-color: var(--white) !important;
 }
+.stButton > button:focus-visible,
+.stDownloadButton > button:focus-visible,
+[data-testid="stPopover"] button:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
 
-.stTabs [role="tablist"] {
-  gap: .45rem;
-  background: transparent;
-  border-bottom: none;
-  flex-wrap: wrap;
-  padding: 0;
-}
-.stTabs [role="tablist"]::after { display: none !important; }
-.stTabs [data-testid="stTab"] {
+[data-testid="stPopover"] button {
   font-family: var(--pixel) !important;
-  font-size: .56rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: .45rem .9rem;
-  height: auto;
-  min-height: 0;
-  cursor: pointer;
-  transition: all .15s ease;
-}
-.stTabs [data-testid="stTab"] p {
-  font-family: var(--pixel) !important;
-  font-size: .56rem !important;
+  font-size: .58rem !important;
   letter-spacing: .1em !important;
+  text-transform: uppercase;
+  color: var(--text) !important;
+  background: transparent !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 999px !important;
+  min-height: 44px !important;
+  padding: .6rem .9rem !important;
+  transition: background .16s ease, color .16s ease, border-color .16s ease;
+}
+[data-testid="stPopover"] button p {
+  font-family: var(--pixel) !important;
+  font-size: .6rem !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase;
   color: inherit !important;
+  white-space: nowrap;
 }
-.stTabs [data-testid="stTab"]:hover { color: var(--text); border-color: var(--muted); }
-.stTabs [data-testid="stTab"][data-selected="true"] {
-  background: var(--white);
-  border-color: var(--white);
-  color: var(--ink);
+[data-testid="stPopover"] button:hover {
+  background: var(--white) !important;
+  color: var(--ink) !important;
+  border-color: var(--white) !important;
 }
-.stTabs .react-aria-SelectionIndicator { display: none !important; }
-.stTabs [data-testid="stTabPanel"] { padding-top: 1.5rem; }
 
 .stRadio [role="radiogroup"] { gap: .45rem; flex-wrap: wrap; }
 .stRadio [role="radiogroup"] label {
   background: transparent;
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: .34rem .8rem;
+  padding: .42rem .9rem;
   margin: 0;
-  transition: all .15s ease;
+  transition: background .16s ease, color .16s ease, border-color .16s ease;
 }
 .stRadio [role="radiogroup"] label:hover { border-color: var(--muted); }
 .stRadio [role="radiogroup"] label:has(input:checked) {
@@ -531,57 +513,93 @@ code {
 .stRadio [data-testid="stRadioOption"] > div > div > div:first-child { display: none !important; }
 .stRadio [role="radiogroup"] label p {
   font-family: var(--pixel) !important;
-  font-size: .52rem !important;
-  letter-spacing: .1em !important;
+  font-size: .62rem !important;
+  letter-spacing: .07em !important;
   text-transform: uppercase;
   color: var(--muted) !important;
 }
+.stRadio [role="radiogroup"] label:has(input:focus-visible) {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
 
+/* vertical tool rail */
 .st-key-workspace_nav [role="radiogroup"] {
   flex-direction: column;
   align-items: stretch;
-  gap: .18rem;
+  gap: .22rem;
   flex-wrap: nowrap;
-  counter-reset: nav;
 }
 .st-key-workspace_nav [data-testid="stRadioOption"] {
   width: 100%;
   display: flex;
   align-items: center;
   border: 1px solid transparent !important;
-  border-radius: 8px !important;
-  padding: .5rem .6rem !important;
+  border-radius: 10px !important;
+  padding: .72rem .85rem !important;
   margin: 0 !important;
   background: transparent !important;
 }
-.st-key-workspace_nav [data-testid="stRadioOption"]::before {
-  counter-increment: nav;
-  content: "0" counter(nav);
-  font-family: var(--pixel);
-  font-size: .48rem;
-  letter-spacing: .06em;
-  color: var(--dim);
-  margin-right: .55rem;
-}
 .st-key-workspace_nav [data-testid="stRadioOption"]:hover {
-  background: rgba(255,255,255,.03) !important;
+  background: rgba(255,255,255,.035) !important;
   border-color: transparent !important;
 }
 .st-key-workspace_nav [data-testid="stRadioOption"][data-selected="true"] {
   background: var(--white) !important;
   border-color: var(--white) !important;
 }
-.st-key-workspace_nav [data-testid="stRadioOption"][data-selected="true"]::before { color: var(--ink); }
 .st-key-workspace_nav [role="radiogroup"] label p {
   font-family: var(--pixel) !important;
-  font-size: .54rem !important;
-  letter-spacing: .08em !important;
+  font-size: .72rem !important;
+  letter-spacing: .05em !important;
   text-transform: uppercase;
   color: var(--muted) !important;
   white-space: nowrap;
 }
 .st-key-workspace_nav [data-testid="stRadioOption"][data-selected="true"] p {
   color: var(--ink) !important;
+}
+[data-testid="stColumn"]:has(.st-key-workspace_nav) {
+  border-right: 1px solid var(--line);
+  padding-right: 1.6rem;
+}
+.st-key-export_json button { width: 100%; }
+.st-key-export_json button p {
+  white-space: nowrap;
+  font-size: .62rem !important;
+}
+
+/* ── status, alerts, data ──────────────────────────────── */
+
+.ll-status {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  padding: .5rem 0;
+  border-bottom: 1px dashed var(--line-soft);
+}
+.ll-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid var(--white);
+  background: var(--white);
+  flex: none;
+  align-self: center;
+}
+.ll-dot.off { background: transparent; border-color: var(--dim); }
+.ll-status-name {
+  font-family: var(--pixel);
+  font-size: .58rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.ll-status-detail {
+  color: var(--dim);
+  font-size: .78rem;
+  margin-left: auto;
+  text-align: right;
 }
 
 [data-testid="stAlert"] {
@@ -591,12 +609,13 @@ code {
 [data-testid="stAlertContainer"] {
   background: var(--panel-2) !important;
   border: 1px solid var(--line) !important;
-  border-left: 2px solid var(--white) !important;
+  border-left: 1px solid var(--white) !important;
   border-radius: 10px !important;
+  padding: .9rem 1.1rem !important;
 }
 [data-testid="stAlertContainer"] p,
 [data-testid="stAlertContainer"] div,
-[data-testid="stAlertContainer"] span { color: var(--text) !important; }
+[data-testid="stAlertContainer"] span { color: var(--text) !important; font-size: .95rem !important; }
 [data-testid="stAlertContainer"] svg { color: var(--muted) !important; }
 
 [data-testid="stMetric"] {
@@ -607,7 +626,7 @@ code {
 }
 [data-testid="stMetricLabel"] p {
   font-family: var(--pixel) !important;
-  font-size: .5rem !important;
+  font-size: .55rem !important;
   letter-spacing: .12em !important;
   text-transform: uppercase;
   color: var(--dim) !important;
@@ -615,9 +634,9 @@ code {
 [data-testid="stMetricValue"] {
   font-family: var(--pixel);
   color: var(--white);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
-[data-testid="stMetricDelta"] { font-family: var(--mono); font-size: .66rem; }
+[data-testid="stMetricDelta"] { font-family: var(--mono); font-size: .78rem; }
 
 [data-testid="stExpander"] {
   border: 1px solid var(--line) !important;
@@ -626,8 +645,8 @@ code {
 }
 [data-testid="stExpander"] summary {
   font-family: var(--pixel) !important;
-  font-size: .55rem !important;
-  letter-spacing: .12em;
+  font-size: .6rem !important;
+  letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted) !important;
 }
@@ -643,16 +662,19 @@ code {
   background: var(--panel-2) !important;
   border: 1px dashed var(--line) !important;
   border-radius: 12px !important;
+  padding: .85rem 1rem !important;
+  min-height: 0 !important;
 }
 [data-testid="stFileUploaderDropzone"] p,
 [data-testid="stFileUploaderDropzone"] span,
 [data-testid="stFileUploaderDropzone"] small {
   color: var(--muted) !important;
   font-family: var(--mono) !important;
+  font-size: .8rem !important;
 }
 [data-testid="stFileUploaderDropzone"] button {
   font-family: var(--pixel) !important;
-  font-size: .55rem !important;
+  font-size: .56rem !important;
   letter-spacing: .1em;
   border: 1px solid var(--line) !important;
   border-radius: 999px !important;
@@ -688,11 +710,64 @@ hr { border: none; border-top: 1px solid var(--line); }
 }
 ::-webkit-scrollbar-thumb:hover { background: #314355; }
 
-@media (max-width: 640px) {
-  .ll-appbar { flex-direction: column; align-items: flex-start; gap: .7rem; }
+/* ── responsive ────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .block-container { padding: 1.2rem 1.25rem 3.5rem; }
+  .ll-appbar { flex-direction: column; align-items: flex-start; gap: .9rem; }
   .ll-appbar-right { justify-content: flex-start; }
-  .ll-brand { font-size: 1.4rem; }
-  .block-container { padding: 1.6rem 1rem 3rem; }
+  .ll-hero { padding: 2.6rem 0 2.2rem; }
+  .ll-hero-title { font-size: 2.6rem; max-width: 100%; }
+  .ll-hero-sub { font-size: .98rem; }
+  [data-testid="stHorizontalBlock"]:has(.st-key-workspace_nav) { flex-wrap: wrap; }
+  [data-testid="stHorizontalBlock"]:has(.st-key-workspace_nav) > [data-testid="stColumn"] {
+    width: 100% !important;
+    flex: 1 1 100% !important;
+    min-width: 100% !important;
+  }
+  [data-testid="stColumn"]:has(.st-key-workspace_nav) {
+    border-right: none;
+    padding-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 1.3rem;
+  }
+  .st-key-workspace_nav [role="radiogroup"] {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .st-key-workspace_nav [data-testid="stRadioOption"] {
+    width: auto !important;
+  }
+  .ll-workspace-rule { margin: 2.2rem 0 1.6rem; }
+  .ll-view-title { font-size: 1.4rem; }
+}
+
+@media (max-width: 900px) {
+  [data-testid="stHorizontalBlock"]:has(.st-key-sample_pick) {
+    flex-wrap: wrap;
+    gap: 1rem !important;
+  }
+  [data-testid="stHorizontalBlock"]:has(.st-key-sample_pick) > [data-testid="stColumn"] {
+    width: 100% !important;
+    flex: 1 1 100% !important;
+    min-width: 100% !important;
+  }
+  .st-key-engine_popover button {
+    width: auto !important;
+    min-width: 150px;
+  }
+  [data-testid="stVerticalBlock"]:has(> [data-testid="stElementContainer"] .ll-card-mark) {
+    padding: 1.15rem 1.1rem !important;
+  }
+  .ll-card-head { flex-direction: column; gap: .25rem; }
+  .ll-hero-title { font-size: 2.25rem; }
+}
+
+@media (max-width: 480px) {
+  .ll-hero-title { font-size: 1.9rem; }
+  .ll-hero-sub { font-size: .95rem; }
+  .ll-brand { font-size: 1.35rem; }
+  .ll-docmeta { gap: .35rem 1.2rem; }
 }
 </style>
 """
@@ -706,6 +781,11 @@ def _label(text: str) -> None:
 
 def _empty(text: str) -> None:
     st.markdown(f'<div class="ll-empty">{html.escape(text)}</div>', unsafe_allow_html=True)
+
+
+def _chip(label: str, ready: bool) -> str:
+    dot = "ll-mini-dot" if ready else "ll-mini-dot off"
+    return f'<span class="ll-chip"><span class="{dot}"></span>{html.escape(label)}</span>'
 
 
 def _status(name: str, ready: bool, detail: str = "") -> None:
@@ -748,263 +828,284 @@ WORKSPACE_VIEWS = {
     "Search": "Find the sentences closest to a phrase.",
 }
 
+HERO = """
+<div class="ll-hero">
+  <div class="ll-hero-title">READ THE ORDER.<br><span>FIND THE LINE.</span></div>
+  <p class="ll-hero-sub">Turn an Indian judgment into a summary, a dated timeline, and the
+  sentence behind every answer. Pick a sample or paste your own text below.</p>
+  <div class="ll-hero-note">
+    <span class="ll-chip">summary</span>
+    <span class="ll-chip">timeline</span>
+    <span class="ll-chip">claims</span>
+    <span class="ll-chip">sentence evidence</span>
+  </div>
+</div>
+"""
+
 
 def main() -> None:
+    artifact_dir = st.session_state.get("artifact_dir", "legallens_artifacts")
+    try:
+        capabilities = runtime_capabilities(artifact_dir)
+    except TypeError:
+        # Compatibility with a runtime module loaded before artifact_dir
+        # support was added.
+        capabilities = runtime_capabilities()
+    # Keep the UI compatible with a stale/reloaded runtime module from
+    # before abstractive checkpoint support was added.
+    abstractive_capability = capabilities.get(
+        "abstractive",
+        {
+            "available": False,
+            "message": "Abstractive checkpoint status is unavailable; extractive fallback is active.",
+        },
+    )
+    knowledge_capability = legal_knowledge_status(artifact_dir)
+
+    abstractive_ready = abstractive_capability.get("available", False)
     st.markdown(
-        """
+        f"""
 <div class="ll-appbar">
   <div>
     <div class="ll-brand">LEGALLENS<span>//</span></div>
     <div class="ll-brand-sub">Indian legal document intelligence</div>
   </div>
   <div class="ll-appbar-right">
-    <span class="ll-chip"><span class="ll-mini-dot"></span>local engine</span>
-    <span class="ll-chip">workspace</span>
+    {_chip("local engine", True)}
+    {_chip("abstractive ready" if abstractive_ready else "extractive only", abstractive_ready)}
+    {_chip("statute index" if knowledge_capability["available"] else "built-in refs", knowledge_capability["available"])}
   </div>
 </div>
 """,
         unsafe_allow_html=True,
     )
 
-    with st.sidebar:
-        st.markdown(
-            '<div class="ll-side-mark">LEGALLENS<span>//</span></div>',
-            unsafe_allow_html=True,
-        )
-        _label("document")
-        demo_name = st.selectbox(
-            "Load a sample document",
-            ["None"] + list(DEMO_DOCUMENTS),
-            help="Samples make it possible to try the app immediately.",
-        )
-        uploaded = st.file_uploader("Upload a judgment PDF", type=["pdf"])
-
-        _label("settings")
-        artifact_dir = st.text_input(
-            "Notebook artifact folder",
-            value="legallens_artifacts",
-            help="Point this at the folder containing the notebook's saved abstractive/ checkpoint.",
-        )
-
-        _label("runtime")
-        try:
-            capabilities = runtime_capabilities(artifact_dir)
-        except TypeError:
-            # Compatibility with a runtime module loaded before artifact_dir
-            # support was added.
-            capabilities = runtime_capabilities()
-        # Keep the UI compatible with a stale/reloaded runtime module from
-        # before abstractive checkpoint support was added.
-        abstractive_capability = capabilities.get(
-            "abstractive",
-            {
-                "available": False,
-                "message": "Abstractive checkpoint status is unavailable; extractive fallback is active.",
-            },
-        )
-        _status(
-            "model artifacts",
-            capabilities["available"],
-            "detected" if capabilities["available"] else "lightweight mode",
-        )
-        _status(
-            "abstractive",
-            abstractive_capability.get("available", False),
-            "checkpoint ready" if abstractive_capability.get("available", False) else "extractive fallback",
-        )
-        knowledge_capability = legal_knowledge_status(artifact_dir)
-        _status(
-            "statute index",
-            knowledge_capability["available"],
-            "indexed" if knowledge_capability["available"] else "built-in refs",
-        )
-        if not abstractive_capability.get("available", False):
-            st.caption(
-                abstractive_capability.get(
-                    "message",
-                    "Abstractive mode will use an extractive fallback until the notebook checkpoint exists.",
-                )
-            )
-
-    sample_text = DEMO_DOCUMENTS.get(demo_name, "")
-    pdf_text = ""
-    pdf_error = ""
-    if uploaded is not None:
-        try:
-            pdf_text = read_pdf_bytes(uploaded.getvalue())
-        except Exception as exc:
-            pdf_error = f"Could not read the PDF: {exc}"
+    hero_slot = st.empty()
 
     with st.container(border=True):
         st.markdown('<div class="ll-card-mark"></div>', unsafe_allow_html=True)
         st.markdown(
             '<div class="ll-card-head"><div class="ll-label">source document</div>'
-            '<div class="ll-meta">paste, upload, or pick a sample</div></div>',
+            '<div class="ll-meta">paste &middot; upload &middot; sample</div></div>',
             unsafe_allow_html=True,
         )
+
+        pick_col, upload_col, engine_col = st.columns(
+            [1.35, 1.35, 0.65], gap="large", vertical_alignment="top"
+        )
+        with pick_col:
+            demo_name = st.selectbox(
+                "Start from a sample",
+                ["None"] + list(DEMO_DOCUMENTS),
+                key="sample_pick",
+                help="Samples make it possible to try the app immediately.",
+            )
+        with upload_col:
+            uploaded = st.file_uploader("Or upload a judgment PDF", type=["pdf"])
+        with engine_col:
+            _label("engine")
+            with st.popover("Settings", use_container_width=True, key="engine_popover"):
+                st.text_input(
+                    "Checkpoint folder",
+                    value="legallens_artifacts",
+                    key="artifact_dir",
+                    help="Folder containing the notebook's saved abstractive/ checkpoint.",
+                )
+                _status(
+                    "model artifacts",
+                    capabilities["available"],
+                    "detected" if capabilities["available"] else "lightweight mode",
+                )
+                _status(
+                    "abstractive",
+                    abstractive_ready,
+                    "checkpoint ready" if abstractive_ready else "extractive fallback",
+                )
+                _status(
+                    "statute index",
+                    knowledge_capability["available"],
+                    "indexed" if knowledge_capability["available"] else "built-in refs",
+                )
+                if not abstractive_ready:
+                    st.caption(
+                        abstractive_capability.get(
+                            "message",
+                            "Abstractive mode will use an extractive fallback until the notebook checkpoint exists.",
+                        )
+                    )
+
+        sample_text = DEMO_DOCUMENTS.get(demo_name, "")
         pasted = st.text_area(
             "Judgment text",
             value=sample_text,
-            height=190,
+            height=170,
             placeholder="Paste the judgment text here, or select a sample / upload a PDF.",
             label_visibility="collapsed",
         )
+
+        pdf_text = ""
+        pdf_error = ""
+        if uploaded is not None:
+            try:
+                pdf_text = read_pdf_bytes(uploaded.getvalue())
+            except Exception as exc:
+                pdf_error = f"Could not read the PDF: {exc}"
+
         if pdf_error:
             st.error(pdf_error)
         elif uploaded is not None and pdf_text:
             st.caption(f"Extracted {len(word_tokens(pdf_text)):,} words from {uploaded.name}.")
 
         text = clean_text(pasted or pdf_text or sample_text)
+
         if text:
+            analysis = analyze_document(text)
             st.markdown(
-                f'<div class="ll-meta">{len(word_tokens(text)):,} words &nbsp;&middot;&nbsp; {len(text):,} characters</div>',
+                f'<div class="ll-docmeta">'
+                f'<span><b>{analysis["word_count"]:,}</b>words</span>'
+                f'<span><b>{analysis["sentence_count"]:,}</b>sentences</span>'
+                f'<span><b>{len(analysis["timeline"]):,}</b>events</span>'
+                f'<span><b>{len(text):,}</b>characters</span>'
+                f'</div>',
                 unsafe_allow_html=True,
             )
-        else:
-            _empty("Provide a PDF, paste text, or select a sample document to begin.")
 
     if not text:
+        with hero_slot.container():
+            st.markdown(HERO, unsafe_allow_html=True)
         return
 
-    analysis = analyze_document(text)
+    st.markdown('<div class="ll-workspace-rule"></div>', unsafe_allow_html=True)
 
-    with st.container(border=True):
-        st.markdown('<div class="ll-card-mark"></div>', unsafe_allow_html=True)
-        nav_col, body_col = st.columns([1, 3.5], gap="large")
+    nav_col, body_col = st.columns([0.85, 3.15], gap="large")
 
-        with nav_col:
-            _label("workspace")
-            view = st.radio(
-                "Workspace view",
-                list(WORKSPACE_VIEWS),
-                key="workspace_nav",
-                label_visibility="collapsed",
+    with nav_col:
+        _label("tools")
+        view = st.radio(
+            "Workspace view",
+            list(WORKSPACE_VIEWS),
+            key="workspace_nav",
+            label_visibility="collapsed",
+        )
+        st.markdown('<div class="ll-nav-sep"></div>', unsafe_allow_html=True)
+        st.download_button(
+            "Export JSON",
+            data=json.dumps(analysis, indent=2, default=str),
+            file_name="legallens_analysis.json",
+            mime="application/json",
+            key="export_json",
+        )
+
+    with body_col:
+        st.markdown(
+            f'<div class="ll-view-head"><div class="ll-view-title">{html.escape(view)}</div>'
+            f'<div class="ll-view-sub">{html.escape(WORKSPACE_VIEWS[view])}</div></div>',
+            unsafe_allow_html=True,
+        )
+
+        if view == "Summary":
+            method = st.radio(
+                "Summary method",
+                ["Extractive (local)", "Abstractive (fine-tuned DistilBART)"],
+                horizontal=True,
+                key="summary_method",
             )
-            st.markdown('<div class="ll-nav-sep"></div>', unsafe_allow_html=True)
-            _label("document")
-            st.markdown(
-                f'<div class="ll-stat"><span>words</span><b>{analysis["word_count"]:,}</b></div>'
-                f'<div class="ll-stat"><span>sentences</span><b>{analysis["sentence_count"]:,}</b></div>'
-                f'<div class="ll-stat"><span>events</span><b>{len(analysis["timeline"]):,}</b></div>',
-                unsafe_allow_html=True,
-            )
-            st.markdown('<div class="ll-nav-sep"></div>', unsafe_allow_html=True)
-            st.download_button(
-                "Export JSON",
-                data=json.dumps(analysis, indent=2, default=str),
-                file_name="legallens_analysis.json",
-                mime="application/json",
-                key="export_json",
-            )
+            if method.startswith("Abstractive"):
+                st.caption("The first run loads a large checkpoint, so it can take a minute.")
 
-        with body_col:
-            st.markdown(
-                f'<div class="ll-view-head"><div class="ll-view-title">{html.escape(view)}</div>'
-                f'<div class="ll-view-sub">{html.escape(WORKSPACE_VIEWS[view])}</div></div>',
-                unsafe_allow_html=True,
-            )
-
-            if view == "Summary":
-                method = st.radio(
-                    "Summary method",
-                    ["Extractive (local)", "Abstractive (fine-tuned DistilBART)"],
-                    horizontal=True,
-                    key="summary_method",
-                )
-                if method.startswith("Abstractive"):
-                    st.caption("The first run loads a large checkpoint, so it can take a minute.")
-
-                if st.button("Generate summary", type="primary", key="summary_button"):
-                    wants_abstractive = method.startswith("Abstractive")
-                    abstractive_ready = abstractive_capability.get("available", False)
-                    if wants_abstractive and abstractive_ready:
-                        with st.spinner("Loading the checkpoint and writing the summary..."):
-                            try:
-                                summary_analysis = analyze_document(
-                                    text, "abstractive", artifact_dir=artifact_dir
-                                )
-                            except TypeError:
-                                # A stale imported runtime may not accept artifact_dir.
-                                summary_analysis = analyze_document(text, "abstractive")
-                    else:
-                        summary_analysis = analyze_document(text, "extractive")
-                        if wants_abstractive:
-                            summary_analysis["summary_note"] = abstractive_capability.get(
-                                "message",
-                                "Abstractive checkpoint unavailable; extractive summary selected.",
+            if st.button("Generate summary", type="primary", key="summary_button"):
+                wants_abstractive = method.startswith("Abstractive")
+                if wants_abstractive and abstractive_ready:
+                    with st.spinner("Loading the checkpoint and writing the summary..."):
+                        try:
+                            summary_analysis = analyze_document(
+                                text, "abstractive", artifact_dir=artifact_dir
                             )
-                            summary_analysis["summary_source"] = "extractive fallback"
-                    if summary_analysis["summary_note"]:
-                        if summary_analysis["summary_source"] == "notebook abstractive checkpoint":
-                            st.success(summary_analysis["summary_note"])
-                        else:
-                            st.warning(summary_analysis["summary_note"])
-                    st.caption(f"Summary source: {summary_analysis['summary_source']}")
-                    _label("summary")
-                    st.write(summary_analysis["summary"] or "No summary could be generated.")
-
-            elif view == "QA + Evidence":
-                question = st.text_input(
-                    "Question",
-                    value="What was the outcome of the case?",
-                    placeholder="e.g. Who is the petitioner? Which section is referred to? What is Section 420?",
-                    key="qa_question",
+                        except TypeError:
+                            # A stale imported runtime may not accept artifact_dir.
+                            summary_analysis = analyze_document(text, "abstractive")
+                else:
+                    summary_analysis = analyze_document(text, "extractive")
+                    if wants_abstractive:
+                        summary_analysis["summary_note"] = abstractive_capability.get(
+                            "message",
+                            "Abstractive checkpoint unavailable; extractive summary selected.",
+                        )
+                        summary_analysis["summary_source"] = "extractive fallback"
+                if summary_analysis["summary_note"]:
+                    if summary_analysis["summary_source"] == "notebook abstractive checkpoint":
+                        st.success(summary_analysis["summary_note"])
+                    else:
+                        st.warning(summary_analysis["summary_note"])
+                st.caption(f"Summary source: {summary_analysis['summary_source']}")
+                _label("summary")
+                st.markdown(
+                    f'<div class="ll-summary">{html.escape(summary_analysis["summary"] or "No summary could be generated.")}</div>',
+                    unsafe_allow_html=True,
                 )
-                if st.button("Answer", type="primary", key="qa_button"):
-                    result = answer_question(question, text, artifact_dir=artifact_dir)
-                    _label("answer")
+
+        elif view == "QA + Evidence":
+            question = st.text_input(
+                "Question",
+                value="What was the outcome of the case?",
+                placeholder="e.g. Who is the petitioner? Which section is referred to? What is Section 420?",
+                key="qa_question",
+            )
+            if st.button("Answer", type="primary", key="qa_button"):
+                result = answer_question(question, text, artifact_dir=artifact_dir)
+                _label("answer")
+                st.markdown(
+                    f'<div class="ll-answer">{html.escape(result["answer"] or "No confident answer found")}</div>',
+                    unsafe_allow_html=True,
+                )
+                if result["evidence"]:
+                    _label("evidence")
                     st.markdown(
-                        f'<div class="ll-answer">{html.escape(result["answer"] or "No confident answer found")}</div>',
+                        f'<div class="ll-evidence">{html.escape(result["evidence"])}</div>',
                         unsafe_allow_html=True,
                     )
-                    if result["evidence"]:
-                        _label("evidence")
-                        st.markdown(
-                            f'<div class="ll-evidence">{html.escape(result["evidence"])}</div>',
-                            unsafe_allow_html=True,
-                        )
 
-            elif view == "Decision":
-                if st.button("Extract outcome", type="primary", key="decision_button"):
-                    outcome = extract_outcome_rules(text)
-                    _label("outcome")
+        elif view == "Decision":
+            if st.button("Extract outcome", type="primary", key="decision_button"):
+                outcome = extract_outcome_rules(text)
+                _label("outcome")
+                st.markdown(
+                    f'<div class="ll-outcome">{html.escape(outcome["outcome"])}</div>',
+                    unsafe_allow_html=True,
+                )
+                st.caption(f"confidence {outcome['confidence']:.2f}")
+                if outcome["evidence"]:
+                    _label("evidence")
                     st.markdown(
-                        f'<div class="ll-outcome">{html.escape(outcome["outcome"])}</div>',
+                        f'<div class="ll-evidence">{html.escape(outcome["evidence"])}</div>',
                         unsafe_allow_html=True,
                     )
-                    st.caption(f"confidence {outcome['confidence']:.2f}")
-                    if outcome["evidence"]:
-                        _label("evidence")
-                        st.markdown(
-                            f'<div class="ll-evidence">{html.escape(outcome["evidence"])}</div>',
-                            unsafe_allow_html=True,
-                        )
 
-            elif view == "Timeline":
-                if st.button("Extract timeline", type="primary", key="timeline_button"):
-                    _render_timeline(extract_timeline(text))
+        elif view == "Timeline":
+            if st.button("Extract timeline", type="primary", key="timeline_button"):
+                _render_timeline(extract_timeline(text))
 
-            elif view == "Claims":
-                if st.button("Extract positions", type="primary", key="claims_button"):
-                    _render_claims(extract_claims(text))
+        elif view == "Claims":
+            if st.button("Extract positions", type="primary", key="claims_button"):
+                _render_claims(extract_claims(text))
 
-            else:
-                query = st.text_input(
-                    "Search query",
-                    placeholder="e.g. alternative remedy",
-                    key="search_query",
-                )
-                if st.button("Search", type="primary", key="search_button"):
-                    results = search_judgment(query, text, limit=3)
-                    if not results:
-                        _empty("No matching sentences.")
-                    for index, result in enumerate(results, 1):
-                        st.markdown(
-                            f'<div class="ll-result"><div class="ll-result-head">'
-                            f'<span>result {index:02d}</span><span>score {result["score"]:.3f}</span></div>'
-                            f'<div class="ll-result-body">{html.escape(result["sentence"])}</div></div>',
-                            unsafe_allow_html=True,
-                        )
+        else:
+            query = st.text_input(
+                "Search query",
+                placeholder="e.g. alternative remedy",
+                key="search_query",
+            )
+            if st.button("Search", type="primary", key="search_button"):
+                results = search_judgment(query, text, limit=3)
+                if not results:
+                    _empty("No matching sentences.")
+                for index, result in enumerate(results, 1):
+                    st.markdown(
+                        f'<div class="ll-result"><div class="ll-result-head">'
+                        f'<span>result {index:02d}</span><span>score {result["score"]:.3f}</span></div>'
+                        f'<div class="ll-result-body">{html.escape(result["sentence"])}</div></div>',
+                        unsafe_allow_html=True,
+                    )
 
 
 if __name__ == "__main__":
