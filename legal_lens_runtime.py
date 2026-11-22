@@ -1056,6 +1056,30 @@ def abstractive_checkpoint_status(artifact_dir: str | os.PathLike[str] | None = 
     return {"available": True, "path": str(checkpoint), "message": "Checkpoint found."}
 
 
+def _ensure_bart_embeddings_tied(model: Any) -> None:
+    """Point BART's embedding aliases at the shared table.
+
+    Some transformers versions keep the checkpoint aliases on separate
+    storages even after ``tie_weights()``. The model still generates, but the
+    aliases can drift apart, so re-tie them explicitly instead of rejecting
+    the checkpoint.
+    """
+    if getattr(model.config, "model_type", "") != "bart":
+        return
+    shared = getattr(getattr(model, "model", None), "shared", None)
+    encoder_embed = getattr(getattr(model.model, "encoder", None), "embed_tokens", None)
+    decoder_embed = getattr(getattr(model.model, "decoder", None), "embed_tokens", None)
+    if shared is None or encoder_embed is None or decoder_embed is None:
+        raise RuntimeError("BART checkpoint is missing its shared embedding table.")
+    encoder_embed.weight = shared.weight
+    decoder_embed.weight = shared.weight
+    if getattr(model.config, "tie_word_embeddings", True):
+        lm_head = getattr(model, "lm_head", None)
+        if lm_head is None:
+            raise RuntimeError("BART checkpoint is missing its language head.")
+        lm_head.weight = shared.weight
+
+
 @lru_cache(maxsize=2)
 def _load_abstractive_components(checkpoint: str) -> tuple[Any, Any, Any]:
     """Load the notebook checkpoint once per process; return model, tokenizer, device."""
@@ -1088,24 +1112,10 @@ def _load_abstractive_components(checkpoint: str) -> tuple[Any, Any, Any]:
     finally:
         hf_logging.set_verbosity(previous_verbosity)
 
-    # Safetensors stores tied BART embeddings once as `model.shared.weight`.
-    # Transformers reports the tied aliases as missing during load, although
-    # they are restored by tie_weights(). Verify the shared tensor and re-tie it
-    # explicitly so a bad/incomplete checkpoint cannot pass silently.
     if hasattr(model, "tie_weights"):
         model.tie_weights()
+    _ensure_bart_embeddings_tied(model)
     if getattr(model.config, "model_type", "") == "bart":
-        shared = getattr(getattr(model, "model", None), "shared", None)
-        encoder_embed = getattr(getattr(model.model, "encoder", None), "embed_tokens", None)
-        decoder_embed = getattr(getattr(model.model, "decoder", None), "embed_tokens", None)
-        lm_head = getattr(model, "lm_head", None)
-        if shared is None or encoder_embed is None or decoder_embed is None or lm_head is None:
-            raise RuntimeError("BART checkpoint is missing its shared embedding/language head.")
-        if not (
-            shared.weight.data_ptr() == encoder_embed.weight.data_ptr()
-            == decoder_embed.weight.data_ptr() == lm_head.weight.data_ptr()
-        ):
-            raise RuntimeError("BART checkpoint embeddings are not correctly tied after loading.")
         model.generation_config.forced_bos_token_id = tokenizer.bos_token_id
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
@@ -1159,7 +1169,7 @@ def abstractive_summary(
         return {
             "summary": summary,
             "available": True,
-            "message": f"Loaded notebook checkpoint on {device}.",
+            "message": "Generated with the notebook checkpoint.",
             "source": "notebook abstractive checkpoint",
         }
     except Exception as exc:

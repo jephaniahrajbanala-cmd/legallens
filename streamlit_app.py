@@ -427,15 +427,19 @@ code {
 }
 
 [data-testid="stAlert"] {
+  background: transparent !important;
+  border: none !important;
+}
+[data-testid="stAlertContainer"] {
   background: var(--panel-2) !important;
   border: 1px solid var(--line) !important;
   border-left: 2px solid var(--white) !important;
   border-radius: 10px !important;
 }
-[data-testid="stAlert"] p,
-[data-testid="stAlert"] div,
-[data-testid="stAlert"] span { color: var(--text) !important; }
-[data-testid="stAlert"] svg { color: var(--muted) !important; }
+[data-testid="stAlertContainer"] p,
+[data-testid="stAlertContainer"] div,
+[data-testid="stAlertContainer"] span { color: var(--text) !important; }
+[data-testid="stAlertContainer"] svg { color: var(--muted) !important; }
 
 [data-testid="stMetric"] {
   background: var(--panel);
@@ -691,15 +695,19 @@ def main() -> None:
             ["Extractive (local)", "Abstractive (fine-tuned DistilBART)"],
             horizontal=True,
         )
+        if method.startswith("Abstractive"):
+            st.caption("The first run loads a large checkpoint, so it can take a minute.")
+
         if st.button("Generate summary", type="primary", key="summary_button"):
             wants_abstractive = method.startswith("Abstractive")
             abstractive_ready = abstractive_capability.get("available", False)
             if wants_abstractive and abstractive_ready:
-                try:
-                    analysis = analyze_document(text, "abstractive", artifact_dir=artifact_dir)
-                except TypeError:
-                    # A stale imported runtime may not accept artifact_dir.
-                    analysis = analyze_document(text, "abstractive")
+                with st.spinner("Loading the checkpoint and writing the summary..."):
+                    try:
+                        analysis = analyze_document(text, "abstractive", artifact_dir=artifact_dir)
+                    except TypeError:
+                        # A stale imported runtime may not accept artifact_dir.
+                        analysis = analyze_document(text, "abstractive")
             else:
                 analysis = analyze_document(text, "extractive")
                 if wants_abstractive:
