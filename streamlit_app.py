@@ -34,23 +34,25 @@ THEME = """
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap');
 
 :root {
-  --ink: #070709;
-  --panel: #0c0c0f;
-  --panel-2: #111114;
-  --line: #27272d;
-  --line-soft: #1a1a1f;
-  --text: #e6e6e3;
-  --muted: #9a9aa2;
-  --dim: #6c6c75;
-  --white: #f4f4f1;
+  --ink: #0a1119;
+  --panel: #0e1721;
+  --panel-2: #121d29;
+  --line: #22303e;
+  --line-soft: #18232f;
+  --text: #dde6ef;
+  --muted: #9aabbd;
+  --dim: #74869a;
+  --white: #f3f7fb;
   --pixel: 'Silkscreen', 'Courier New', monospace;
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 .stApp {
   background-color: var(--ink);
-  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.05) 1px, transparent 0);
-  background-size: 26px 26px;
+  background-image:
+    radial-gradient(900px 500px at 50% -8%, rgba(96,124,153,.12), transparent 65%),
+    radial-gradient(circle at 1px 1px, rgba(154,171,189,.07) 1px, transparent 0);
+  background-size: auto, 26px 26px;
   color: var(--text);
   font-family: var(--mono);
 }
@@ -304,7 +306,7 @@ code {
   line-height: 1.7 !important;
 }
 .stTextInput input::placeholder,
-.stTextArea textarea::placeholder { color: #55555d !important; }
+.stTextArea textarea::placeholder { color: #526275 !important; }
 
 [data-testid="stSelectbox"] [data-baseweb="select"] > div {
   background: var(--panel-2) !important;
@@ -518,11 +520,11 @@ hr { border: none; border-top: 1px solid var(--line); }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--ink); }
 ::-webkit-scrollbar-thumb {
-  background: #232329;
+  background: #22303e;
   border-radius: 999px;
   border: 2px solid var(--ink);
 }
-::-webkit-scrollbar-thumb:hover { background: #34343c; }
+::-webkit-scrollbar-thumb:hover { background: #314355; }
 
 @media (max-width: 640px) {
   .ll-header { flex-direction: column; align-items: flex-start; gap: .6rem; }
